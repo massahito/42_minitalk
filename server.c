@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2022/12/31 00:24:58 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/22 16:43:07 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	signal_handler(int signum)
 	static int	degit;
 
 	g_bitsum <<= 1;
-	if (signum == 17)
+	if (signum == SIGUSR2)
 		g_bitsum += 1;
 	if (7 <= degit)
 	{
@@ -43,8 +43,8 @@ int	main(void)
 	pid = getpid();
 	printf("%d\n", pid);
 	sa.sa_handler = signal_handler;
-	sigaction(16, &sa, NULL);
-	sigaction(17, &sa, NULL);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:17 by marai             #+#    #+#             */
-/*   Updated: 2022/12/31 13:19:44 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/22 16:40:48 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ int	send_char_bit(pid_t pid, char *argv[], int index)
 	while (0 <= j)
 	{
 		if ((chr >> j) & 1)
-			result = kill(pid, 17);
+			result = kill(pid, SIGUSR2);
 		else
-			result = kill(pid, 16);
+			result = kill(pid, SIGUSR1);
 		if (result == -1)
 		{
 			ft_printf("Can't send the messege\nPlease check the pid.\n");
 			return (-1);
 		}
-		usleep(100);
+		usleep(300);
 		j--;
 	}
 	return (1);
