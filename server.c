@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/24 01:05:02 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/24 02:26:30 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int	main(void)
 	pid_t				pid;
 	struct sigaction	sa;
 
-	sigemptyset(&sa.sa_mask);
+	if (sigemptyset(&sa.sa_mask) != 0)
+	{
+		ft_printf("sigempty error\n");
+		exit(1);
+	}
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
