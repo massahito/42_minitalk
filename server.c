@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/22 16:43:07 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/24 01:05:02 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ int	main(void)
 	pid_t				pid;
 	struct sigaction	sa;
 
-	pid = getpid();
-	printf("%d\n", pid);
+	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
+	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
+	pid = getpid();
+	printf("%d\n", pid);
 	while (1)
 		;
 }
