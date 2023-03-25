@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:17 by marai             #+#    #+#             */
-/*   Updated: 2023/03/24 00:19:39 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 23:00:10 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ pid_t	check_error(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		ft_printf("Incorrect the number of arguments\n");
+		ft_printf("number of arguments must be 3\n");
 		return (-1);
 	}
 	pid = ft_atoi(argv[1]);
-	if (pid <= 1)
+	if (pid <= 1 || 4194304 < pid)
 	{
 		ft_printf("Invalid process id\n");
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/24 02:38:47 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 22:51:19 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,34 @@
 #include <sys/types.h>
 
 //global variable
-int	g_bitsum;
+volatile sig_atomic_t	g_bitsum;
 
 //signalhandler
+
 void	signal_handler(int signum)
 {
-	static int	degit;
-
-	g_bitsum <<= 1;
 	if (signum == SIGUSR2)
-		g_bitsum += 1;
-	if (7 <= degit)
+		g_bitsum = 2;
+	else
+		g_bitsum = 1;
+}
+
+static void	calc_bit(void)
+{
+	static int	digit;
+	static int	bitsum;
+
+	bitsum <<= 1;
+	if (g_bitsum == 2)
+		bitsum |= 1;
+	if (7 <= digit)
 	{
-		write(1, &g_bitsum, 1);
-		g_bitsum = 0;
-		degit = 0;
+		write(1, &bitsum, 1);
+		bitsum = 0;
+		digit = 0;
 	}
 	else
-		degit++;
+		digit++;
 }
 
 int	main(void)
@@ -50,7 +60,10 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	pid = getpid();
-	printf("%d\n", pid);
+	ft_printf("%d\n", pid);
 	while (1)
-		;
+	{
+		pause();
+		calc_bit();
+	}
 }
