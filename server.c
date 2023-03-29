@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/29 10:40:59 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/29 11:36:49 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	calc_bit(void)
 	static int	digit;
 	static int	bitsum;
 
+	if(g_bitsum != 1 && g_bitsum != 2)
+		return ;
 	bitsum <<= 1;
 	if (g_bitsum == 2)
 		bitsum |= 1;
