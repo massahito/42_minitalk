@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 22:51:19 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/29 10:40:59 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	signal_handler(int signum)
 {
 	if (signum == SIGUSR2)
 		g_bitsum = 2;
-	else
+	else if (signum == SIGUSR1)
 		g_bitsum = 1;
+	else
+		g_bitsum = 0;
 }
 
 static void	calc_bit(void)
